@@ -1,7 +1,7 @@
 /**
  * 
  */
-package basico;
+package classes_basicas;
 
 /**
  * @author jnmar

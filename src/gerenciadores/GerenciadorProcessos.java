@@ -6,7 +6,7 @@ package gerenciadores;
 import java.util.ArrayList;
 import java.util.List;
 
-import basico.Processo;
+import classes_basicas.Processo;
 
 /**
  * @author jnmar

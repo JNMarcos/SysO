@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import basico.Processo;
-import basico.TempoIO;
+import classes_basicas.ConfiguracoesMemoria;
+import classes_basicas.Pagina;
+import classes_basicas.Processo;
+import classes_basicas.Requisicao;
+import classes_basicas.TempoIO;
 import gerenciadores.GerenciadorMemoria;
 import gerenciadores.GerenciadorProcessos;
 
@@ -40,31 +43,76 @@ public class Main {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			switch(i) {
-			case 0:
-				while (sc.hasNext()) {
+				case 0:
+					while (sc.hasNext()) {
+						linha = sc.nextLine().replace("ï»¿", "");
+						System.out.println(linha);
+						param = linha.split(" ");
+						
+						String[] tempIO = param[2].split(";");
+						List<TempoIO> temposIO = new ArrayList<>();
+						if (linha.contains(":")) {
+							temposIO = new ArrayList<TempoIO>();
+							for (String s: tempIO) {
+								s = s.replaceFirst("\\Q[\\E", "");
+								s = s.replaceFirst("\\Q]\\E", "");
+								TempoIO t = new TempoIO(Integer.parseInt(s.split(":")[0]), Integer.parseInt(s.split(":")[1]));
+								temposIO.add(t);
+							}
+						}
+						
+						Processo p = new Processo(Integer.parseInt(param[0]), Integer.parseInt(param[1]), temposIO, Integer.parseInt(param[3]), Integer.parseInt(param[4]),
+								Integer.parseInt(param[5]));
+						System.out.println(p.toString());
+						gp.addProcesso(p);
+					}
+					break;
+				case 1:
 					linha = sc.nextLine().replace("ï»¿", "");
 					System.out.println(linha);
-					param = linha.split(" ");
+					param = linha.split(";");
 					
-					String[] tempIO = param[2].split(";");
-					List<TempoIO> temposIO = new ArrayList<>();
-					if (linha.contains(":")) {
-						temposIO = new ArrayList<TempoIO>();
-						for (String s: tempIO) {
-							s = s.replaceFirst("\\Q[\\E", "");
-							s = s.replaceFirst("\\Q]\\E", "");
-							TempoIO t = new TempoIO(Integer.parseInt(s.split(":")[0]), Integer.parseInt(s.split(":")[1]));
-							temposIO.add(t);
-						}
+					ConfiguracoesMemoria configuracoes = new ConfiguracoesMemoria(Integer.parseInt(param[0]),
+							Integer.parseInt(param[1]));
+					
+					//cria-se um conjunto de páginas, que representam a memória
+					Pagina[] paginas = new Pagina[configuracoes.getQtdPaginas()];
+					
+					while (sc.hasNext()) {
+						linha = sc.nextLine().replace("ï»¿", "");
+						System.out.println(linha);
+						param = linha.split(" ");
+	
+						boolean resRefereciado = (param[4]).equals("1")? true : false;
+						boolean resModificado = (param[5]).equals("1")? true : false;
+						
+						//cria a página na memória, com as configurações existentes no arquivo
+						paginas[Integer.parseInt(param[0])] = new Pagina(
+								param[1], Integer.parseInt(param[2]), Integer.parseInt(param[3]),
+								resRefereciado, resModificado);
+						System.out.println(paginas[Integer.parseInt(param[0])].toString());
 					}
 					
-					Processo p = new Processo(Integer.parseInt(param[0]), Integer.parseInt(param[1]), temposIO, Integer.parseInt(param[3]), Integer.parseInt(param[4]),
-							Integer.parseInt(param[5]));
-					System.out.println(p.toString());
-					gp.addProcesso(p);
-				}
-			default:
+					gm.setConfiguracoes(configuracoes);
+					gm.setPaginas(paginas);
+					break;
+				case 2:
+					List<Requisicao> requisicoes = new ArrayList<>();
+					
+					while (sc.hasNext()) {
+						linha = sc.nextLine().replace("ï»¿", "");
+						System.out.println(linha);
+						param = linha.split(" ");
+						
+						requisicoes.add(new Requisicao(param[0], Integer.parseInt(param[1])));
+						System.out.println(requisicoes.get(requisicoes.size() - 1).toString());
+					}
+					gm.setRequisicoes(requisicoes);
+					break;
+				default:
+					System.out.println("Olha o problema aparecendo");
 			}
 		}
 	}

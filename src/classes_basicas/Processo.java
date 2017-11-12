@@ -1,7 +1,7 @@
 /**
  * 
  */
-package basico;
+package classes_basicas;
 
 import java.util.List;
 
