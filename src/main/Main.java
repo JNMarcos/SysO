@@ -3,17 +3,14 @@
  */
 package main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
-import classes_basicas.ConfiguracoesMemoria;
+import algoritmos.FIFO;
+import classes_basicas.ES;
 import classes_basicas.Pagina;
-import classes_basicas.Processo;
 import classes_basicas.Requisicao;
-import classes_basicas.TempoIO;
 import gerenciadores.GerenciadorMemoria;
 import gerenciadores.GerenciadorProcessos;
 
@@ -21,99 +18,73 @@ import gerenciadores.GerenciadorProcessos;
  * @author jnmar
  *
  */
-public class Main {
-	private static Scanner sc;
-	private static String[] nomeArquivosLeitura = {"docs\\entradaProcessos.txt", "docs\\entradaConfigMemória.txt",
-	"docs\\entradaReqMemória.txt"};
-	
-	private static GerenciadorProcessos gp = new GerenciadorProcessos();
-	private static GerenciadorMemoria gm = new GerenciadorMemoria();
+public class Main {	
+	public static GerenciadorProcessos gp = new GerenciadorProcessos();
+	public static GerenciadorMemoria gm = new GerenciadorMemoria();
+	public static int tempo;
+	static Random addTempo = new Random();
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int i;
-		String linha = "";
-		String[] param;
-		for (i = 0; i < nomeArquivosLeitura.length; i++) {
-			try {
-				sc = new Scanner(new File(nomeArquivosLeitura[i]));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		//entrada-saída
+		ES io = new ES();
+		io.ler();
+		
+		//apenas para testar o algoritmo
+		int numAlgoritmo = 0;
+		int numPaginas;
+		
+		FIFO fifo = new FIFO();
+		
+		boolean paginaJaAdicionada;
+		for (Requisicao req: gm.getRequisicoes()) {
+			numPaginas = (int) Math.round((double) (req.getTamanhoRequisicao()) / gm.getConfiguracoes().getTamanhoPagina());
+			System.out.println("Num pages: " + numPaginas);
+			for (int i = 0; i < numPaginas; i++) {
+				tempo = tempo + addTempo.nextInt(100);
+				System.out.println("Requisicao:" +  req.getNomeProcesso() + i);
+				
+				Set<Integer> paginasSorteadas = new HashSet<>();
+				paginaJaAdicionada = false;
+				
+				int numDaPagina;
+				do {
+					numDaPagina = gm.gerarNumeroAleatorio();
+					paginasSorteadas.add(numDaPagina);
+					//se não há página (ocupada), cria (passa a ocupar)
+					if (gm.getPaginas()[numDaPagina] == null) {
+						gm.getPaginas()[numDaPagina] = new Pagina(req.getNomeProcesso(), tempo, tempo, true, true); 
+						paginaJaAdicionada = true;
+						break;
+					}						
+					
+
+				} while(paginasSorteadas.size() < gm.getConfiguracoes().getQtdPaginas());
+				System.out.println("Qtd page sorteadas: " + paginasSorteadas.size());
+				//se chegou até aqui, é pq todas as páginas foram sorteadas. Memória cheia
+				//usar algoritmo de substituição
+				
+				if (!paginaJaAdicionada) {
+					switch(numAlgoritmo) {
+						case 0:
+							fifo.algoritmo(req);
+							break;
+						default:
+								
+					}
+				}
+				
+				for (int j = 0; j < gm.getPaginas().length; j++) {
+					System.out.println(gm.getPaginas()[j].getNomeProcesso());
+					System.out.println(gm.getPaginas()[j].getInstTempoArmazenada());
+					System.out.println(gm.getPaginas()[j].getInstTempoReferenciada());
+					System.out.println(gm.getPaginas()[j].isReferenciado());
+					System.out.println(gm.getPaginas()[j].isModificado());
+				}
 			}
-			
-			switch(i) {
-				case 0:
-					while (sc.hasNext()) {
-						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
-						param = linha.split(" ");
-						
-						String[] tempIO = param[2].split(";");
-						List<TempoIO> temposIO = new ArrayList<>();
-						if (linha.contains(":")) {
-							temposIO = new ArrayList<TempoIO>();
-							for (String s: tempIO) {
-								s = s.replaceFirst("\\Q[\\E", "");
-								s = s.replaceFirst("\\Q]\\E", "");
-								TempoIO t = new TempoIO(Integer.parseInt(s.split(":")[0]), Integer.parseInt(s.split(":")[1]));
-								temposIO.add(t);
-							}
-						}
-						
-						Processo p = new Processo(Integer.parseInt(param[0]), Integer.parseInt(param[1]), temposIO, Integer.parseInt(param[3]), Integer.parseInt(param[4]),
-								Integer.parseInt(param[5]));
-						System.out.println(p.toString());
-						gp.addProcesso(p);
-					}
-					break;
-				case 1:
-					linha = sc.nextLine().replace("ï»¿", "");
-					System.out.println(linha);
-					param = linha.split(";");
-					
-					ConfiguracoesMemoria configuracoes = new ConfiguracoesMemoria(Integer.parseInt(param[0]),
-							Integer.parseInt(param[1]));
-					
-					//cria-se um conjunto de páginas, que representam a memória
-					Pagina[] paginas = new Pagina[configuracoes.getQtdPaginas()];
-					
-					while (sc.hasNext()) {
-						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
-						param = linha.split(" ");
-	
-						boolean resRefereciado = (param[4]).equals("1")? true : false;
-						boolean resModificado = (param[5]).equals("1")? true : false;
-						
-						//cria a página na memória, com as configurações existentes no arquivo
-						paginas[Integer.parseInt(param[0])] = new Pagina(
-								param[1], Integer.parseInt(param[2]), Integer.parseInt(param[3]),
-								resRefereciado, resModificado);
-						System.out.println(paginas[Integer.parseInt(param[0])].toString());
-					}
-					
-					gm.setConfiguracoes(configuracoes);
-					gm.setPaginas(paginas);
-					break;
-				case 2:
-					List<Requisicao> requisicoes = new ArrayList<>();
-					
-					while (sc.hasNext()) {
-						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
-						param = linha.split(" ");
-						
-						requisicoes.add(new Requisicao(param[0], Integer.parseInt(param[1])));
-						System.out.println(requisicoes.get(requisicoes.size() - 1).toString());
-					}
-					gm.setRequisicoes(requisicoes);
-					break;
-				default:
-					System.out.println("Olha o problema aparecendo");
-			}
+
 		}
 	}
 

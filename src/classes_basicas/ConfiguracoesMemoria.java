@@ -25,7 +25,7 @@ public class ConfiguracoesMemoria {
 	}
 	
 	private int calcularQtdPaginas() {
-		return Math.round(this.tamanhoMemoria/this.tamanhoPagina);
+		return (int) (Math.round((double)(this.tamanhoMemoria)/this.tamanhoPagina));
 	}
 	
 	public int getTamanhoMemoria() {

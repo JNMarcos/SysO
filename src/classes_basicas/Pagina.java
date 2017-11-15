@@ -10,8 +10,8 @@ package classes_basicas;
 public class Pagina {
 	private String nomeProcesso;
 	//em ambos são os últimos instantes de tempo
-	private int instTempoArmazenada;
-	private int instTempoReferenciada;
+	private long instTempoArmazenada;
+	private long instTempoReferenciada;
 	
 	//quando 1 = referenciado/modificado
 	private boolean isReferenciado;
@@ -22,7 +22,7 @@ public class Pagina {
 		
 	}
 	
-	public Pagina(String nomeProcesso, int instTempoArmazenada, int instTempoReferenciada, boolean isReferenciado,
+	public Pagina(String nomeProcesso, long instTempoArmazenada, long instTempoReferenciada, boolean isReferenciado,
 			boolean isModificado) {
 		super();
 		this.nomeProcesso = nomeProcesso;
@@ -38,16 +38,16 @@ public class Pagina {
 	public void setNomeProcesso(String nomeProcesso) {
 		this.nomeProcesso = nomeProcesso;
 	}
-	public int getInstTempoArmazenada() {
+	public long getInstTempoArmazenada() {
 		return instTempoArmazenada;
 	}
-	public void setInstTempoArmazenada(int instTempoArmazenada) {
+	public void setInstTempoArmazenada(long instTempoArmazenada) {
 		this.instTempoArmazenada = instTempoArmazenada;
 	}
-	public int getInstTempoReferenciada() {
+	public long getInstTempoReferenciada() {
 		return instTempoReferenciada;
 	}
-	public void setInstTempoReferenciada(int instTempoReferenciada) {
+	public void setInstTempoReferenciada(long instTempoReferenciada) {
 		this.instTempoReferenciada = instTempoReferenciada;
 	}
 	public boolean isReferenciado() {
