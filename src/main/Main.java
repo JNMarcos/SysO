@@ -37,6 +37,7 @@ public class Main {
 	static LRU lru = new LRU();
 	static RoundRobin rb = new RoundRobin();
 	static SJF sjf = new SJF();
+	static RateMonotonic rate = new RateMonotonic();
 
 	/**
 	 * @param args
@@ -77,18 +78,15 @@ public class Main {
 			ES io = new ES();
 			io.ler();
 			
-			StringBuilder saida = new StringBuilder();
-			saida.append((a == 0 ? "FIFO" : "LRU") + "\n");
-			
 			switch(a) {
 				case 0:
-					//rb.algoritmo();
+					rb.algoritmo();
 					break;
 				case 1:
-					sjf.algoritmo();
+					//sjf.algoritmo();
 					break;
 				case 2:
-					//new RateMonotonic();
+					//rate.algoritmo();
 					break;
 				default:
 	
