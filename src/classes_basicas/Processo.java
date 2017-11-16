@@ -16,6 +16,7 @@ public class Processo {
 	private int prioridade;
 	private int periodo;
 	private int deadline;
+	private int tempoEstimadoProcessamento;
 	
 	public Processo(){
 		
@@ -28,6 +29,7 @@ public class Processo {
 		this.prioridade = prioridade;
 		this.periodo = periodo;
 		this.deadline = deadline;
+		this.tempoEstimadoProcessamento = calcularTempoEstimadoProcessamento();
 	}
 	
 	public int getTempoChegada() {
@@ -75,6 +77,19 @@ public class Processo {
 	}
 	public void setDeadline(int deadline) {
 		this.deadline = deadline;
+	}
+	public int getTempoEstimadoProcessamento() {
+		return tempoEstimadoProcessamento;
+	}
+	public void setTempoEstimadoProcessamento(int tempoEstimadoProcessamento) {
+		this.tempoEstimadoProcessamento = tempoEstimadoProcessamento;
+	}
+	public int calcularTempoEstimadoProcessamento() {
+		int tempoEstimadoProcessamento = this.tempoComputacao;
+		for (int j = 0; j <this.getTemposIO().size(); j++) {
+			tempoEstimadoProcessamento += (this.getTemposIO().get(j).getFimIntervalo() - this.getTemposIO().get(j).getInicioIntervalo());
+		}
+		return tempoEstimadoProcessamento;
 	}
 
 	@Override

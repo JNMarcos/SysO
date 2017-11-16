@@ -30,6 +30,8 @@ public class Main {
 	public static GerenciadorMemoria gm = new GerenciadorMemoria();
 	public static int tempo;
 	static Random addTempo = new Random();
+	public static final int N_ALGORITMOS_PROCESSOS = 3;
+	public static final int N_ALGORITMOS_MEMORIA = 2;
 
 	static FIFO fifo = new FIFO();
 	static LRU lru = new LRU();
@@ -41,7 +43,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// gerenciarMemoria();
-		gerenciarProcessos(2);		
+		gerenciarProcessos();		
 	}
 	
 	public static void writeFile(String filename, String content) {
@@ -70,21 +72,27 @@ public class Main {
 		}
 	}
 
-	public static void gerenciarProcessos(int numAlgoritmo) {
-		ES io = new ES();
-		io.ler();
-		
-		switch(numAlgoritmo) {
-			case 0:
-				rb.algoritmo();
-				break;
-			case 1:
-				break;
-			case 2:
-				new RateMonotonic();
-				break;
-			default:
-
+	public static void gerenciarProcessos() {
+		for (int a = 0; a < N_ALGORITMOS_PROCESSOS; a++) {
+			ES io = new ES();
+			io.ler();
+			
+			StringBuilder saida = new StringBuilder();
+			saida.append((a == 0 ? "FIFO" : "LRU") + "\n");
+			
+			switch(a) {
+				case 0:
+					//rb.algoritmo();
+					break;
+				case 1:
+					sjf.algoritmo();
+					break;
+				case 2:
+					//new RateMonotonic();
+					break;
+				default:
+	
+			}
 		}
 	}
 
@@ -93,8 +101,7 @@ public class Main {
 			//entrada-sa�da
 			ES io = new ES();
 			io.ler();
-			
-			//apenas para testar o algoritmo
+		
 			int numAlgoritmo = a;
 			int numPaginas;
 			
@@ -133,10 +140,10 @@ public class Main {
 					if (!paginaJaAdicionada) {
 						switch(numAlgoritmo) {
 							case 0:
-								fifo.algoritmo(req);
+								//fifo.algoritmo(req);
 								break;
 							case 1:
-								lru.algoritmo(req);
+								//lru.algoritmo(req);
 								break;
 							default:
 									
