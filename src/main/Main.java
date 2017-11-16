@@ -83,10 +83,10 @@ public class Main {
 					rb.algoritmo();
 					break;
 				case 1:
-					//sjf.algoritmo();
+					sjf.algoritmo();
 					break;
 				case 2:
-					//rate.algoritmo();
+					rate.algoritmo();
 					break;
 				default:
 	

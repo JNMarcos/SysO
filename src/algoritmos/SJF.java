@@ -79,12 +79,6 @@ public class SJF {
 			
 	}
 	}
-	
-	public void ordenarTempoRestante() {
-		//for () {
-			
-		//}
-	}
 
 	public void algoritmo() {
 		int processosFinalizados = 0;
@@ -114,8 +108,6 @@ public class SJF {
 				if (p.getTempoChegada() <= tempoComputacaoAlgoritmo &&  tempoRestComp > 0 ) {
 					tempoInIO = p.getTemposIO().size() >= 1 ? p.getTemposIO().get(0).getInicioIntervalo() : -1;
 					tempoComputado = p.getTempoComputacao() - tempoRestComp;
-
-					System.out.println(p.getTemposIO().size() + " tempoInIO " + tempoInIO);
 					//calcula-se o tempoPronto
 					tp.setTempoPronto(
 							tp.getTempoPronto() + tempoComputacaoAlgoritmo - (tp.ultInstComp + tp.ultTempoIO)
@@ -150,14 +142,21 @@ public class SJF {
 			
 			}
 		
+		
+		System.out.println("SJF");
 		for (int j = 0; j < tempoProcessamento.size(); j++) {
-			System.out.println(j + " tempoComptTotalAlgo " + tempoComputacaoAlgoritmo);
+			System.out.println("ID: " + processosOrdenados.get(j));
 			System.out.println("Tempo Pronto: " + tempoProcessamento.get(j).getTempoPronto());
 			System.out.println("Tempo Resposta: " + tempoProcessamento.get(j).getTempoResposta());
 			System.out.println("Tempo Restante: " + tempoProcessamento.get(j).getTempoRestante());
 			System.out.println("Tempo IO: " + tempoProcessamento.get(j).getTempoIO());
-			System.out.println("throughpt: " + (double)(processosFinalizados)/tempoProcessamento.get(j).getTempoResposta());
+		
 		}
+		
+		System.out.println("\n\nTempo de Computação do Algoritmo: " + tempoComputacaoAlgoritmo);
+		System.out.println("Número de processos finalizados: " + processosFinalizados);
+		System.out.println("Tempo de Computação do Algoritmo: " + tempoComputacaoAlgoritmo);
+		System.out.println("Throughput: " + (double)(processosFinalizados)/tempoComputacaoAlgoritmo + "\n");
 	}
 
 }
