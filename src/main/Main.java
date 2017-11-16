@@ -40,10 +40,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new RateMonotonic();
-		
-		gerenciarMemoria();
-		gerenciarProcessos(0);		
+		// gerenciarMemoria();
+		gerenciarProcessos(2);		
 	}
 	
 	public static void writeFile(String filename, String content) {
@@ -83,6 +81,7 @@ public class Main {
 			case 1:
 				break;
 			case 2:
+				new RateMonotonic();
 				break;
 			default:
 

@@ -45,6 +45,16 @@ public class Processo {
 	public List<TempoIO> getTemposIO() {
 		return temposIO;
 	}
+	public int getSomaIO() {
+		int soma = 0;
+		if (temposIO != null) {
+			for (int i = 0; i < temposIO.size(); i++) {
+				soma += temposIO.get(i).getFimIntervalo() - temposIO.get(i).getInicioIntervalo();
+			}
+		}
+		
+		return soma;
+	}
 	public void setTemposIO(List<TempoIO> temposIO) {
 		this.temposIO = temposIO;
 	}
