@@ -2,48 +2,48 @@ LRU
 Requisicao: A0
 A 95 130 false false
 B 110 135 true false
-A 377 377 true true
+A 306 306 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C0
 A 95 130 false false
-C 440 135 true true
-A 377 377 true true
+C 328 135 true true
+A 306 306 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C1
-C 458 130 true true
-C 440 135 true true
-A 377 377 true true
+C 378 130 true true
+C 328 135 true true
+A 306 306 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C2
-C 458 130 true true
-C 440 135 true true
-A 377 377 true true
+C 378 130 true true
+C 328 135 true true
+A 306 306 true true
 C 235 340 false true
-C 555 300 true true
+C 409 300 true true
 Requisicao: C3
-C 458 130 true true
-C 440 135 true true
-C 579 377 true true
+C 378 130 true true
+C 328 135 true true
+C 429 306 true true
 C 235 340 false true
-C 555 300 true true
+C 409 300 true true
 Requisicao: D0
-C 458 130 true true
-C 440 135 true true
-C 579 377 true true
-D 598 340 true true
-C 555 300 true true
+C 378 130 true true
+C 328 135 true true
+C 429 306 true true
+D 510 340 true true
+C 409 300 true true
 Requisicao: D1
-C 458 130 true true
-D 614 135 true true
-C 579 377 true true
-D 598 340 true true
-C 555 300 true true
+C 378 130 true true
+D 539 135 true true
+C 429 306 true true
+D 510 340 true true
+C 409 300 true true
 Requisicao: E0
-E 651 130 true true
-D 614 135 true true
-C 579 377 true true
-D 598 340 true true
-C 555 300 true true
+E 579 130 true true
+D 539 135 true true
+C 429 306 true true
+D 510 340 true true
+C 409 300 true true

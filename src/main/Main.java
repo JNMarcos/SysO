@@ -12,6 +12,8 @@ import java.util.Set;
 
 import algoritmos.FIFO;
 import algoritmos.LRU;
+import algoritmos.RoundRobin;
+import algoritmos.SJF;
 import classes_basicas.ES;
 import classes_basicas.Pagina;
 import classes_basicas.Requisicao;
@@ -28,15 +30,65 @@ public class Main {
 	public static int tempo;
 	static Random addTempo = new Random();
 
+	static FIFO fifo = new FIFO();
+	static LRU lru = new LRU();
+	static RoundRobin rb = new RoundRobin();
+	static SJF sjf = new SJF();
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		FIFO fifo = new FIFO();
-		LRU lru = new LRU();
+		gerenciarMemoria();
+		gerenciarProcessos(0);		
+	}
+	
+	public static void writeFile(String filename, String content) {
+		BufferedWriter bw = null;
+		FileWriter fw = null;
+
+		try {
+
+			fw = new FileWriter(filename);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+			
+			System.out.println(filename + " written");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	public static void gerenciarProcessos(int numAlgoritmo) {
+		ES io = new ES();
+		io.ler();
 		
+		switch(numAlgoritmo) {
+			case 0:
+				rb.algoritmo();
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+
+		}
+	}
+
+	public static void gerenciarMemoria() {
 		for (int a = 0; a < 2; a++) {
-			//entrada-saída
+			//entrada-saï¿½da
 			ES io = new ES();
 			io.ler();
 			
@@ -63,7 +115,7 @@ public class Main {
 					do {
 						numDaPagina = gm.gerarNumeroAleatorio();
 						paginasSorteadas.add(numDaPagina);
-						//se não há página (ocupada), cria (passa a ocupar)
+						//se nï¿½o hï¿½ pï¿½gina (ocupada), cria (passa a ocupar)
 						if (gm.getPaginas()[numDaPagina] == null) {
 							gm.getPaginas()[numDaPagina] = new Pagina(req.getNomeProcesso(), tempo, tempo, true, true); 
 							paginaJaAdicionada = true;
@@ -73,8 +125,8 @@ public class Main {
 	
 					} while(paginasSorteadas.size() < gm.getConfiguracoes().getQtdPaginas());
 					// System.out.println("Qtd page sorteadas: " + paginasSorteadas.size());
-					//se chegou até aqui, é pq todas as páginas foram sorteadas. Memória cheia
-					//usar algoritmo de substituição
+					//se chegou atï¿½ aqui, ï¿½ pq todas as pï¿½ginas foram sorteadas. Memï¿½ria cheia
+					//usar algoritmo de substituiï¿½ï¿½o
 					
 					if (!paginaJaAdicionada) {
 						switch(numAlgoritmo) {
@@ -105,32 +157,6 @@ public class Main {
 			}
 			
 			writeFile("out/" + (a == 0 ? "fifo" : "lru") + ".txt", saida.toString());
-		}
-	}
-	
-	public static void writeFile(String filename, String content) {
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-
-		try {
-
-			fw = new FileWriter(filename);
-			bw = new BufferedWriter(fw);
-			bw.write(content);
-			
-			System.out.println(filename + " written");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (bw != null)
-					bw.close();
-
-				if (fw != null)
-					fw.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
 		}
 	}
 }
