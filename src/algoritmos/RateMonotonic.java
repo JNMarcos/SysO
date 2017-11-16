@@ -17,10 +17,10 @@ public class RateMonotonic {
 //		processos.add(new Processo(0, 6, null, 0, 20, 0));
 //		processos.add(new Processo(0, 8, null, 0, 15, 0));
 //		
-		processos.add(new Processo(0, 3, null, 0, 20, 0));
-		processos.add(new Processo(0, 2, null, 0, 5, 0));
-		processos.add(new Processo(0, 2, null, 0, 10, 0));
-		//processos = (ArrayList<Processo>) Main.gp.getProcessos();
+//		processos.add(new Processo(5, 3, null, 0, 20, 0));
+//		processos.add(new Processo(0, 2, null, 0, 5, 0));
+//		processos.add(new Processo(2, 2, null, 0, 10, 0));
+		processos = (ArrayList<Processo>) Main.gp.getProcessos();
 		
 		double V1 = 0;
 		double V2 = 0;
@@ -59,6 +59,11 @@ public class RateMonotonic {
 				}
 				
 				start++;
+			}
+			
+			for (int j = 0; j < processos.get(i).getTempoChegada(); j++) {
+				linhaDoTempo.add(0, 0);
+				linhaDoTempo.remove(linhaDoTempo.size() - 1);
 			}
 			
 			linhasDoTempo.add(linhaDoTempo);
