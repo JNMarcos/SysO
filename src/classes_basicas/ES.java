@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import gerenciadores.GerenciadorMemoria;
+import gerenciadores.GerenciadorProcessos;
 import main.Main;
 
 /**
@@ -17,14 +19,18 @@ import main.Main;
  */
 public class ES {
 	private static Scanner sc;
-	private static String[] nomeArquivosLeitura = {"docs\\entradaProcessos.txt", "docs\\entradaConfigMemória.txt",
-	"docs\\entradaReqMemória.txt"};
+	private static String[] nomeArquivosLeitura = {"docs/entradaProcessos.txt", "docs/entradaConfigMemória.txt",
+	"docs/entradaReqMemória.txt"};
 
 	public ES() {
 
 	}
 	
 	public void ler() {
+		Main.gp = new GerenciadorProcessos();
+		Main.gm = new GerenciadorMemoria();
+		Main.tempo = 0;
+		
 		int maiorTempoArmazenamento = 0;
 		int i;
 		String linha = "";
@@ -41,7 +47,7 @@ public class ES {
 				case 0:
 					while (sc.hasNext()) {
 						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
+						//System.out.println(linha);
 						param = linha.split(" ");
 						
 						String[] tempIO = param[2].split(";");
@@ -58,13 +64,13 @@ public class ES {
 						
 						Processo p = new Processo(Integer.parseInt(param[0]), Integer.parseInt(param[1]), temposIO, Integer.parseInt(param[3]), Integer.parseInt(param[4]),
 								Integer.parseInt(param[5]));
-						System.out.println(p.toString());
+						//System.out.println(p.toString());
 						Main.gp.addProcesso(p);
 					}
 					break;
 				case 1:
 					linha = sc.nextLine().replace("ï»¿", "");
-					System.out.println(linha);
+					//System.out.println(linha);
 					param = linha.split(";");
 					
 					ConfiguracoesMemoria configuracoes = new ConfiguracoesMemoria(Integer.parseInt(param[0]),
@@ -75,7 +81,7 @@ public class ES {
 					
 					while (sc.hasNext()) {
 						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
+						//System.out.println(linha);
 						param = linha.split(" ");
 	
 						boolean resRefereciado = (param[4]).equals("1")? true : false;
@@ -89,7 +95,7 @@ public class ES {
 						paginas[Integer.parseInt(param[0])] = new Pagina(
 								param[1], Integer.parseInt(param[2]), Integer.parseInt(param[3]),
 								resRefereciado, resModificado);
-						System.out.println(paginas[Integer.parseInt(param[0])].toString());
+						//System.out.println(paginas[Integer.parseInt(param[0])].toString());
 					}
 					
 					Main.gm.setConfiguracoes(configuracoes);
@@ -100,11 +106,11 @@ public class ES {
 					
 					while (sc.hasNext()) {
 						linha = sc.nextLine().replace("ï»¿", "");
-						System.out.println(linha);
+						//System.out.println(linha);
 						param = linha.split(" ");
 						
 						requisicoes.add(new Requisicao(param[0], Integer.parseInt(param[1])));
-						System.out.println(requisicoes.get(requisicoes.size() - 1).toString());
+						//System.out.println(requisicoes.get(requisicoes.size() - 1).toString());
 					}
 					Main.gm.setRequisicoes(requisicoes);
 					break;
