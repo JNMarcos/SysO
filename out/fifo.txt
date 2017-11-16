@@ -2,48 +2,48 @@ FIFO
 Requisicao: A0
 A 95 130 false false
 B 110 135 true false
-A 306 306 true true
+A 359 359 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C0
-C 350 130 true true
+C 454 130 true true
 B 110 135 true false
-A 306 306 true true
+A 359 359 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C1
-C 350 130 true true
-C 446 135 true true
-A 306 306 true true
+C 454 130 true true
+C 454 135 true true
+A 359 359 true true
 C 235 340 false true
 A 300 300 true true
 Requisicao: C2
-C 350 130 true true
-C 446 135 true true
-A 306 306 true true
-C 464 340 true true
+C 454 130 true true
+C 454 135 true true
+A 359 359 true true
+C 480 340 true true
 A 300 300 true true
 Requisicao: C3
-C 350 130 true true
-C 446 135 true true
-A 306 306 true true
-C 464 340 true true
-C 500 300 true true
+C 454 130 true true
+C 454 135 true true
+A 359 359 true true
+C 480 340 true true
+C 535 300 true true
 Requisicao: D0
-C 350 130 true true
-C 446 135 true true
-D 558 306 true true
-C 464 340 true true
-C 500 300 true true
+C 454 130 true true
+C 454 135 true true
+D 577 359 true true
+C 480 340 true true
+C 535 300 true true
 Requisicao: D1
-D 566 130 true true
-C 446 135 true true
-D 558 306 true true
-C 464 340 true true
-C 500 300 true true
+D 660 130 true true
+C 454 135 true true
+D 577 359 true true
+C 480 340 true true
+C 535 300 true true
 Requisicao: E0
-D 566 130 true true
-E 605 135 true true
-D 558 306 true true
-C 464 340 true true
-C 500 300 true true
+D 660 130 true true
+E 752 135 true true
+D 577 359 true true
+C 480 340 true true
+C 535 300 true true

@@ -19,7 +19,48 @@ public class RateMonotonic {
 		
 		processos.sort((p1, p2) -> p1.getPeriodo() - p2.getPeriodo());
 		
-		int tempoNoProcesso = 0;
+		ArrayList<int[]> linhasDoTempo = new ArrayList<>();
+		
+		for (int i = 0; i < processos.size(); i++) {
+			int[] linhaDoTempo = new int[LCM];
+			
+			int start = 0;
+			for (int j = 0; j < LCM; j++) {
+				if (j % processos.get(i).getPeriodo() == 0) {
+					linhaDoTempo[j] = i + 1;
+					start = 0;
+				}
+				
+				if (start < processos.get(i).getTempoComputacao()) {
+					linhaDoTempo[j] = i + 1;
+				}
+				
+				start++;
+			}
+			
+			linhasDoTempo.add(linhaDoTempo);
+		}
+		
+		int[] tabela = new int[LCM];
+		tabela = linhasDoTempo.get(0);
+		
+		for (int i = 0; i < tabela.length; i++) {
+			if (tabela[i] == 0) {
+				for (int j = 1; j < linhasDoTempo.size(); j++) {
+					for (int k = 0; k < linhasDoTempo.get(j).length; k++) {
+						if (linhasDoTempo.get(j)[k] > 0 && tabela[i + k] == 0) {
+							tabela[i + k] = linhasDoTempo.get(j)[k];
+						}
+					}
+				}
+			}
+		}
+		
+		if (linhasDoTempo.size() == 2) {
+			
+		}
+		
+		/*int tempoNoProcesso = 0;
 		int[] vezEmProcesso = new int[processos.size()];
 		int processoAtual = 0;
 		
@@ -64,7 +105,7 @@ public class RateMonotonic {
 			}
 		}
 		
-		System.out.println(tabela.toString());
+		System.out.println(tabela.toString());*/
 	}
 	
 	private int gcd(int x, int y) {

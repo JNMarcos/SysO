@@ -12,6 +12,7 @@ import java.util.Set;
 
 import algoritmos.FIFO;
 import algoritmos.LRU;
+import algoritmos.RateMonotonic;
 import algoritmos.RoundRobin;
 import algoritmos.SJF;
 import classes_basicas.ES;
@@ -39,6 +40,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		new RateMonotonic();
+		
 		gerenciarMemoria();
 		gerenciarProcessos(0);		
 	}
