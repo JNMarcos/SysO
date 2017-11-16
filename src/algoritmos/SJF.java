@@ -148,14 +148,15 @@ public class SJF {
 				}
 			}
 			
-			for (int j = 0; j < tempoProcessamento.size(); j++) {
-				System.out.println(j + " tempoComptTotalAlgo " + tempoComputacaoAlgoritmo);
-				System.out.println("Tempo Pronto: " + tempoProcessamento.get(j).getTempoPronto());
-				System.out.println("Tempo Resposta: " + tempoProcessamento.get(j).getTempoResposta());
-				System.out.println("Tempo Restante: " + tempoProcessamento.get(j).getTempoRestante());
-				System.out.println("Tempo IO: " + tempoProcessamento.get(j).getTempoIO());
-				System.out.println("throughpt: " + (double)(processosFinalizados)/tempoComputacaoAlgoritmo);
 			}
+		
+		for (int j = 0; j < tempoProcessamento.size(); j++) {
+			System.out.println(j + " tempoComptTotalAlgo " + tempoComputacaoAlgoritmo);
+			System.out.println("Tempo Pronto: " + tempoProcessamento.get(j).getTempoPronto());
+			System.out.println("Tempo Resposta: " + tempoProcessamento.get(j).getTempoResposta());
+			System.out.println("Tempo Restante: " + tempoProcessamento.get(j).getTempoRestante());
+			System.out.println("Tempo IO: " + tempoProcessamento.get(j).getTempoIO());
+			System.out.println("throughpt: " + (double)(processosFinalizados)/tempoProcessamento.get(j).getTempoResposta());
 		}
 	}
 
