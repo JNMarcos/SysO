@@ -91,6 +91,7 @@ public class RoundRobin {
 				System.out.println("Tempo Resposta: " + tempoProcessamento.get(j).getTempoResposta());
 				System.out.println("Tempo Restante: " + tempoProcessamento.get(j).getTempoRestante());
 				System.out.println("Tempo IO: " + tempoProcessamento.get(j).getTempoIO());
+				System.out.println("throughpt: " + (double)(processosFinalizados)/tempoComputacaoAlgoritmo);
 			}
 		}
 	}

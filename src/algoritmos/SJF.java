@@ -130,7 +130,7 @@ public class SJF {
 						tempoIO = (p.getTemposIO().get(0).getFimIntervalo() - tempoInIO);
 						//tmpRest = tempRest_anterior + tempComputação
 						//tempComputação = diferença entre o tempoComp (tempoComputado) e o tempoIO de entrada
-						int tempoComp = tempoInIO - tempoComputado;
+						int tempoComp = (tempoInIO + tp.ultTempoIO) - tempoComputado;
 						tp.ultTempoIO = tempoIO;
 						tempoComputacaoAlgoritmo += tempoComp;
 						tp.setTempoRestante(tp.getTempoRestante() - tempoComp);
@@ -154,6 +154,7 @@ public class SJF {
 				System.out.println("Tempo Resposta: " + tempoProcessamento.get(j).getTempoResposta());
 				System.out.println("Tempo Restante: " + tempoProcessamento.get(j).getTempoRestante());
 				System.out.println("Tempo IO: " + tempoProcessamento.get(j).getTempoIO());
+				System.out.println("throughpt: " + (double)(processosFinalizados)/tempoComputacaoAlgoritmo);
 			}
 		}
 	}
