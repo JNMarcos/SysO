@@ -102,14 +102,14 @@ public class ES {
 					Main.gm.setPaginas(paginas);
 					break;
 				case 2:
-					List<Requisicao> requisicoes = new ArrayList<>();
+					List<RequisicaoMemoria> requisicoes = new ArrayList<>();
 					
 					while (sc.hasNext()) {
 						linha = sc.nextLine().replace("﻿", "");
 						//System.out.println(linha);
 						param = linha.split(" ");
 						
-						requisicoes.add(new Requisicao(param[0], Integer.parseInt(param[1])));
+						requisicoes.add(new RequisicaoMemoria(param[0], Integer.parseInt(param[1])));
 						//System.out.println(requisicoes.get(requisicoes.size() - 1).toString());
 					}
 					Main.gm.setRequisicoes(requisicoes);

@@ -3,11 +3,11 @@ package algoritmos;
 import java.util.HashMap;
 
 import classes_basicas.Pagina;
-import classes_basicas.Requisicao;
+import classes_basicas.RequisicaoMemoria;
 import main.Main;
 
 public class LRU {
-	public void algoritmo(Requisicao r) {
+	public void algoritmo(RequisicaoMemoria r) {
 		Pagina[] paginas = Main.gm.getPaginas();
 		HashMap<String, Long> map = new HashMap<>();
 		

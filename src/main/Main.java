@@ -17,7 +17,7 @@ import algoritmos.RoundRobin;
 import algoritmos.SJF;
 import classes_basicas.ES;
 import classes_basicas.Pagina;
-import classes_basicas.Requisicao;
+import classes_basicas.RequisicaoMemoria;
 import gerenciadores.GerenciadorMemoria;
 import gerenciadores.GerenciadorProcessos;
 
@@ -107,7 +107,7 @@ public class Main {
 			saida.append((a == 0 ? "FIFO" : "LRU") + "\n");
 			
 			boolean paginaJaAdicionada;
-			for (Requisicao req: gm.getRequisicoes()) {
+			for (RequisicaoMemoria req: gm.getRequisicoes()) {
 				numPaginas = (int) Math.round((double) (req.getTamanhoRequisicao()) / gm.getConfiguracoes().getTamanhoPagina());
 				// System.out.println("Num pages: " + numPaginas);
 				for (int i = 0; i < numPaginas; i++) {

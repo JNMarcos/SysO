@@ -7,15 +7,15 @@ package classes_basicas;
  * @author jnmar
  *
  */
-public class Requisicao {
+public class RequisicaoMemoria {
 	private String nomeProcesso;//poderia ser char (como no próprio enunciado diz)
 	private int tamanhoRequisicao;//em kb e para cálculo de quantidade de páginas a serem alocadas
 	
-	public Requisicao(){
+	public RequisicaoMemoria(){
 		
 	}
 	
-	public Requisicao(String nomeProcesso, int tamanhoRequisicao){
+	public RequisicaoMemoria(String nomeProcesso, int tamanhoRequisicao){
 		this.nomeProcesso = nomeProcesso;
 		this.tamanhoRequisicao = tamanhoRequisicao;
 		

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import classes_basicas.ConfiguracoesMemoria;
 import classes_basicas.Pagina;
-import classes_basicas.Requisicao;
+import classes_basicas.RequisicaoMemoria;
 import main.Main;
 
 /**
@@ -19,7 +19,7 @@ import main.Main;
 public class GerenciadorMemoria {
 	private ConfiguracoesMemoria configuracoes;
 	private Pagina[] paginas;
-	private List<Requisicao> requisicoes;
+	private List<RequisicaoMemoria> requisicoes;
 	private Random geradorNumeroPagina;
 
 	public GerenciadorMemoria() {
@@ -27,7 +27,7 @@ public class GerenciadorMemoria {
 	}
 
 	public GerenciadorMemoria(ConfiguracoesMemoria configuracoes, Pagina[] paginas, 
-			List<Requisicao> requisicoes) {
+			List<RequisicaoMemoria> requisicoes) {
 		super();
 		this.configuracoes = configuracoes;
 		this.paginas = paginas;
@@ -47,11 +47,11 @@ public class GerenciadorMemoria {
 		this.paginas = paginas;
 	}
 
-	public List<Requisicao> getRequisicoes() {
+	public List<RequisicaoMemoria> getRequisicoes() {
 		return requisicoes;
 	}
 
-	public void setRequisicoes(List<Requisicao> requisicoes) {
+	public void setRequisicoes(List<RequisicaoMemoria> requisicoes) {
 		this.requisicoes = requisicoes;
 	}	
 	public int gerarNumeroAleatorio() {

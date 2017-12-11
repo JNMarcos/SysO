@@ -2,7 +2,7 @@ package algoritmos;
 
 import java.util.List;
 
-import classes_basicas.Requisicao;
+import classes_basicas.RequisicaoMemoria;
 import main.Main;
 
 public class FIFO {	
@@ -10,7 +10,7 @@ public class FIFO {
 		super();
 	}
 
-	public void algoritmo(Requisicao r) {
+	public void algoritmo(RequisicaoMemoria r) {
 		List<Integer> ordemPaginasMaisVelhas = Main.gm.ordenarPaginasTempoArmazenamento();
 		
 		//atualiza as informações da página com a nova requisicao

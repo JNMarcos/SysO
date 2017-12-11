@@ -4,9 +4,13 @@ public enum Comandos {
 	Direita("O braço moverá para a direita."),
 	Esquerda("O braço moverá para a esquerda."),
 	IndicarPosicao("O braço está na posição "),
-	NaoMover("O braço não se moveu."),
-	IrUltimaPosicao("O braço está na última posição do cilindro."),
-	IrPrimeiraPosicao("O braço está na primeira posição do cilindro.");
+	FicarParado("O braço permaneceu na mesma posição."),
+	ChegarAUltimaPosicao("O braço chegou à última posição do cilindro."),
+	ChegarAPrimeiraPosicao("O braço chegou à primeira posição do cilindro."),
+	PercorrerAteOInicio("O braço está indo para a posição inicial."),
+	PercorrerAteOFim("O braço está indo para a posição final."),
+	PercorrerAte("O braço está indo para "),
+	SomarNPosicoesPercorridas(" posições foram percorridas até ");
 
 	private String comando;
 
